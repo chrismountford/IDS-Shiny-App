@@ -7,6 +7,10 @@ ids_data <- read.csv("IDS_Data.csv", header = TRUE)
 ids_country <- read.csv("IDS_Country.csv", header = TRUE)
 
 
+## Pick out 'interesting' debt indicators
+# int_factors <- c("GNI (current US$)", )
+
+
 ## IDS Data requires melting by year - also need to remove 'X' from these year names
 ids_data_melted <- melt(ids_data, id.vars = 1:4, variable.name = "Year")
 
@@ -23,3 +27,5 @@ min_year <- min(ids_data_melted$Year, na.rm = T)
 max_year <- max(ids_data_melted$Year, na.rm = T)
 
 regions <- levels(ids_data_melted$Region)[which(levels(ids_data_melted$Region)!="")] # Remove empty region vals
+
+indicators <- levels(ids_data$Indicator.Name)
