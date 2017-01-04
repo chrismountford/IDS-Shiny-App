@@ -6,7 +6,10 @@ shinyUI(
                             min = min_year,
                             max = max_year,
                             value = c(min_year, max_year))
-              ),
+              ,
+              radioButtons("region", "Select a Region:",
+                           choices = c("ALL", regions),
+                           selected = "ALL")),
               
               mainPanel(
                 

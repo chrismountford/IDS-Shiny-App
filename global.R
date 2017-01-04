@@ -13,6 +13,13 @@ ids_data_melted <- melt(ids_data, id.vars = 1:4, variable.name = "Year")
 ids_data_melted$Year <- as.numeric(gsub("X", "", ids_data_melted$Year))
 
 
+## Lookup region from country data
+ids_data_melted <- merge(ids_data_melted, ids_country[, c("Table.Name", "Region")], all.x = TRUE,
+                         by.x = "ï..Country.Name", by.y = "Table.Name")
+
+
 ## Define vars for UI
 min_year <- min(ids_data_melted$Year, na.rm = T)
 max_year <- max(ids_data_melted$Year, na.rm = T)
+
+regions <- levels(ids_data_melted$Region)[which(levels(ids_data_melted$Region)!="")] # Remove empty region vals
