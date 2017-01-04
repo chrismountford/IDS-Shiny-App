@@ -8,14 +8,17 @@ shinyUI(
                             value = c(min_year, max_year)),
                 
               radioButtons("region", "Select a Region:",
-                           choices = c("ALL", regions),
-                           selected = "ALL"),
+                           choices = c("All Regions", regions),
+                           selected = "All Regions"),
               
               selectInput("indicators", "Select an Indicator:",
                           choices = indicators, selected = indicators[1])
               
                 ),
               mainPanel(
+                textOutput("text_page1"),
+                tags$head(tags$style("#text_page1{font-size: 20px;
+                                                  font-style: bold;"))
                 
               )
               
