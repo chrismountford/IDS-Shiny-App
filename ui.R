@@ -18,7 +18,9 @@ shinyUI(
               mainPanel(
                 textOutput("text_page1"),
                 tags$head(tags$style("#text_page1{font-size: 20px;
-                                                  font-style: bold;"))
+                                                  font-style: bold;")),
+                
+                plotOutput("page1_line")
                 
               )
               
