@@ -9,9 +9,7 @@ shinyServer(function(input, output) {
     react_title()
   })
   
-  
-  
-  output$page1_line <- renderPlot({
+  data_to_use_page1 <- reactive({
     ifelse(input$region == "All Regions",
            data_to_use_page1 <- subset(ids_data_melted, ids_data_melted$Indicator.Name %in% input$indicators &
                                          ids_data_melted$Year >= input$years[1] &
@@ -21,8 +19,14 @@ shinyServer(function(input, output) {
                                          ids_data_melted$Year <= input$years[2] &
                                          ids_data_melted$Region %in% input$region))
     
-    ggplot(data_to_use_page1, aes(x = Year, y = value)) +
-      stat_summary(geom = "line", fun.y = mean)
+    return(data_to_use_page1)
+  })
+  
+  output$page1_line <- renderPlot({
+    
+    ggplot(data_to_use_page1(), aes(x = Year, y = value)) +
+      stat_summary(geom = "line", fun.y = mean) +
+      theme_bw()
     
     
     
